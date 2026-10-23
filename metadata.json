@@ -1,0 +1,6 @@
+{
+  "name": "Paula Medeiros Estética",
+  "description": "Bronzeamento natural, cuidados estéticos e bem-estar para realçar o que já existe de mais bonito em você.",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

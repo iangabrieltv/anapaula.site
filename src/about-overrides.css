@@ -1,0 +1,208 @@
+/* Seção Sobre a Paula — Banner panorâmico como imagem de fundo ajustada */
+.about-section {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  height: clamp(520px, 33.33vw, 700px);
+  overflow: hidden;
+  background-color: #ede5dc;
+  display: flex !important;
+  grid-template-columns: none !important;
+  align-items: center;
+}
+
+.about-section .about-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-section .about-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.about-section .about-container {
+  position: relative;
+  z-index: 2;
+  width: 83.8%;
+  max-width: 1200px;
+  margin-inline: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-section .about-copy {
+  position: relative;
+  z-index: 2;
+  font-size: 40px;
+  height: 10px;
+  width: 11px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(237, 229, 220, 0.78) 0%,
+    rgba(237, 229, 220, 0.45) 60%,
+    transparent 100%
+  );
+  border-radius: 12px;
+}
+
+.about-section .about-copy > p:nth-of-type(1) {
+  height: 17px;
+  width: 200px;
+  line-height: 20px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  letter-spacing: 0.22em;
+}
+
+.about-section .about-copy h2,
+.about-section .about-copy > h2:nth-of-type(1) {
+  font-size: 46.4px;
+  line-height: 0.98;
+  width: 500px;
+}
+
+.about-section .about-copy > p:nth-of-type(2) {
+  font-size: 9px;
+  margin-top: 8px;
+  width: 500px;
+}
+
+.about-section .about-copy > p:nth-of-type(3) {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+  margin-top: 12px;
+  width: 450px;
+}
+
+.about-section .about-copy > p:nth-of-type(4) {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+  margin-top: 10px;
+  width: 450px;
+}
+
+.about-section .about-copy > button:nth-of-type(1) {
+  font-size: 19px;
+  margin-top: 16px;
+  height: 50.5px;
+  width: 272.812px;
+}
+
+.about-section .about-logo {
+  display: block;
+  width: 140px;
+  height: auto;
+  max-height: 52px;
+  object-fit: contain;
+  margin: 20px auto 0;
+}
+
+/* Telas médias (tablets e notebooks compactos) */
+@media (max-width: 1100px) and (min-width: 768px) {
+  .about-section {
+    min-height: 480px;
+    height: clamp(480px, 42vw, 560px);
+  }
+
+  .about-section .about-bg-image {
+    object-position: 25% center;
+  }
+
+  .about-section .about-copy {
+    max-width: 390px;
+    padding: 24px 16px;
+  }
+
+  .about-section .about-copy h2 {
+    font-size: 30px;
+  }
+
+  .about-section .about-copy > p:not(.eyebrow) {
+    font-size: 10px;
+  }
+
+  .about-section .about-logo {
+    width: 125px;
+    max-height: 46px;
+  }
+}
+
+/* Telas de celular (< 768px) */
+@media (max-width: 767px) {
+  .about-section {
+    min-height: 600px;
+    height: auto;
+    display: block !important;
+    grid-template-columns: none !important;
+    padding-top: 250px;
+    padding-bottom: 34px;
+    background-color: #ede5dc;
+  }
+
+  .about-section .about-bg-image {
+    object-position: 18% top;
+    height: 350px;
+  }
+
+  .about-section .about-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(237, 229, 220, 0) 0%,
+      rgba(237, 229, 220, 0.7) 160px,
+      rgba(237, 229, 220, 0.98) 260px,
+      rgba(237, 229, 220, 1) 100%
+    );
+  }
+
+  .about-section .about-container {
+    height: auto;
+    display: block;
+    width: calc(100% - 40px);
+  }
+
+  .about-section .about-copy {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 16px 12px 0;
+    background: none;
+  }
+
+  .about-section .about-copy h2 {
+    font-size: 34px;
+  }
+
+  .about-section .about-copy > p:not(.eyebrow) {
+    font-size: 12px;
+    max-width: 380px;
+  }
+
+  .about-section .about-copy .pill {
+    height: 36px;
+    font-size: 10px;
+  }
+
+  .about-section .about-logo {
+    width: 130px;
+    margin-top: 20px;
+  }
+}
