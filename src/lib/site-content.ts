@@ -15,7 +15,9 @@ import serviceMassagem from "@/assets/images/service_massagem_1792698901720.jpg"
 import serviceFacial from "@/assets/images/service_facial_1792698902062.jpg";
 import serviceOlhar from "@/assets/images/service_olhar_1792698902347.jpg";
 import servicePes from "@/assets/images/service_pes_1792698903090.jpg";
-import serviceExperiencias from "@/assets/images/service_experiencias_1792698903759.jpg";
+import serviceRedux from "@/assets/images/service_redux_1792893467247.jpg";
+import serviceRelax from "@/assets/images/service_relax_1792893468342.jpg";
+import serviceTermal from "@/assets/images/service_termal_1792893468223.jpg";
 
 // Imagens dos 4 quadrados do ambiente / espaço
 import spaceRecepcao from "@/assets/images/space_recepcao_1792698904664.jpg";
@@ -57,8 +59,8 @@ export const site = {
 
 export const navigation = [
   { label: "Início", id: "inicio" },
-  { label: "Sobre a Paula", id: "sobre" },
   { label: "Serviços", id: "servicos" },
+  { label: "Sobre a Paula", id: "sobre" },
   { label: "Espaço", id: "espaco" },
   { label: "Depoimentos", id: "depoimentos" },
   { label: "Contato", id: "contato" },
@@ -66,95 +68,118 @@ export const navigation = [
 
 export const services = [
   {
-    id: "bronze",
-    title: "Bronzeamento Natural",
-    subtitle: "Dourado perfeito & seguro",
-    description:
-      "Técnicas exclusivas de bronzeamento ao sol, montagem artesanal de biquíni de fita e hidratação iluminadora.",
+    id: "bronze-paula-medeiros",
+    title: "Bronze Paula Medeiros",
+    subtitle: "Bronzeamento natural exclusivo",
+    description: "Bronzeamento natural com segurança e sofisticação.",
+    iconType: "sun" as const,
     image: serviceBronze,
     items: [
       "Bronze Sol Clássico",
       "Bronze Premium Ouro",
       "Bronze Redux Ativado",
       "Bronze Orgânico Virgínia",
+      "Montagem Artesanal de Biquíni de Fita",
+      "Hidratação Iluminadora Pós-Sol",
     ],
-    tag: "Destaque da Clínica",
   },
   {
-    id: "massagens",
-    title: "Massagens Corporais",
-    subtitle: "Alívio, detox & contorno",
-    description:
-      "Manobras de relaxamento profundo, drenagem linfática desintoxicante e protocolos de modelagem corporal.",
+    id: "experiencia-leveza",
+    title: "Experiência Leveza",
+    subtitle: "Drenagem & desintoxicação",
+    description: "Massagens e detox para mais leveza no seu dia.",
+    iconType: "leaf" as const,
     image: serviceMassagem,
     items: [
       "Drenagem Linfática Método Exclusivo",
       "Detox Corporal Completo",
       "Detox Abdominal Modelador",
-      "Massagem Redux Localizada",
-      "Massagem Relaxante com Óleos Essenciais",
-      "Massagem Terapêutica Humanizada",
+      "Massagem Desintoxicante Suave",
     ],
-    tag: "Bem-estar Corporal",
   },
   {
-    id: "faciais",
-    title: "Tratamentos Faciais",
-    subtitle: "Pele viçosa & renovada",
-    description:
-      "Protocolos completos de limpeza profunda, esfoliação ultrassônica, hidratação biológica e revitalização.",
+    id: "experiencia-redux",
+    title: "Experiência Redux",
+    subtitle: "Contorno corporal e definição",
+    description: "Tecnologia e técnicas para contornos mais definidos.",
+    iconType: "silhouette" as const,
+    image: serviceRedux,
+    items: [
+      "Massagem Redux Localizada",
+      "Remodelagem Corporal com Bambuterapia",
+      "Drenagem Linfática Redutora",
+      "Ativação Metabólica Local",
+    ],
+  },
+  {
+    id: "experiencia-relax",
+    title: "Experiência Relax",
+    subtitle: "Paz, acolhimento & harmonia",
+    description: "Relaxamento profundo para o seu bem-estar.",
+    iconType: "flower" as const,
+    image: serviceRelax,
+    items: [
+      "Massagem Relaxante com Óleos Essenciais",
+      "Terapia Antiestresse de Pontos de Tensão",
+      "Aromaterapia Harmonizante",
+      "Alívio Muscular e Descompressão",
+    ],
+  },
+  {
+    id: "experiencia-termal",
+    title: "Experiência Termal",
+    subtitle: "Calor restaurador & conforto",
+    description: "Calor e conforto para o seu corpo e sua mente.",
+    iconType: "heat" as const,
+    image: serviceTermal,
+    items: [
+      "Terapia com Pedras Vulcânicas Aquecidas",
+      "Termoterapia Corporal Desintoxicante",
+      "Envolvimento Térmico Revitalizante",
+      "Alívio de Dores e Tensões Musculares",
+    ],
+  },
+  {
+    id: "spa-dos-pes",
+    title: "Spa dos Pés",
+    subtitle: "Renovação & leveza podal",
+    description: "Cuidados especiais para pés e pele.",
+    iconType: "feet" as const,
+    image: servicePes,
+    items: [
+      "Plástica e Renovação dos Pés",
+      "Escalda-Pés Aromático com Sais e Flores",
+      "Massagem Podal Relaxante com Reflexologia",
+      "Esfoliação e Hidratação Biológica Profunda",
+    ],
+  },
+  {
+    id: "pele-perfeita",
+    title: "Pele Perfeita",
+    subtitle: "Saúde, brilho & pureza facial",
+    description: "Limpeza e renovação da sua pele.",
+    iconType: "face" as const,
     image: serviceFacial,
     items: [
-      "Limpeza de Pele Essencial",
-      "Limpeza de Pele Profunda com Peeling de Diamante",
-      "Hidratação Rejuvenescedora",
-      "Revitalização Glow Facial",
+      "Limpeza de Pele Profunda e Extração Segura",
+      "Peeling de Diamante Suave e Renovador",
+      "Hidratação Biológica Regenerativa",
+      "Revitalização Glow Facial com Vitamina C",
     ],
-    tag: "Saúde da Pele",
   },
   {
     id: "olhar",
-    title: "Design do Olhar",
-    subtitle: "Expressão & harmonia",
-    description:
-      "Visagismo facial com designer de sobrancelhas personalizado, aplicação de henna natural e extensão de cílios fio a fio.",
+    title: "Olhar",
+    subtitle: "Expressão, simetria & destaque",
+    description: "Realce o que há de mais único em você.",
+    iconType: "eye" as const,
     image: serviceOlhar,
     items: [
-      "Design de Sobrancelhas Personalizado",
-      "Design com Henna Orgânica",
-      "Extensão de Cílios Fio a Fio",
-      "Lash Lifting & Nutrição",
+      "Design de Sobrancelhas Personalizado Visagista",
+      "Design com Aplicação de Henna Orgânica",
+      "Lash Lifting e Nutrição Queratinizada",
+      "Extensão de Cílios Fio a Fio Natural",
     ],
-    tag: "Harmonia Facial",
-  },
-  {
-    id: "pes",
-    title: "Spa dos Pés",
-    subtitle: "Leveza do início ao fim",
-    description:
-      "Ritual completo com escalda-pés relaxante com pétalas, sais minerais, massagem podal e renovação celular profunda.",
-    image: servicePes,
-    items: [
-      "Plástica & Renovação dos Pés",
-      "Escalda-Pés Aromático com Ervas",
-      "Escalda-Pés com Massagem Relaxante",
-    ],
-    tag: "Relaxamento",
-  },
-  {
-    id: "especiais",
-    title: "Experiências Especiais",
-    subtitle: "Programas exclusivos Paula Medeiros",
-    description:
-      "Imersões de estética e autocuidado que combinam bronze, massoterapia e rituais faciais em um único atendimento.",
-    image: serviceExperiencias,
-    items: [
-      "Experiência Leveza Absoluta",
-      "Experiência Redux & Contorno",
-      "Experiência Relax & Harmonia",
-      "Experiência Termal Revitalizante",
-    ],
-    tag: "Exclusividade",
   },
 ];
 export type Service = (typeof services)[number];

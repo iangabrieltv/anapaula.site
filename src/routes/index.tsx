@@ -7,22 +7,80 @@ import {
   Clock3,
   CheckCircle2,
   ExternalLink,
+  Eye,
+  Flame,
+  Flower2,
+  Footprints,
   Heart,
   Instagram,
+  Leaf,
   MapPin,
   Maximize2,
   Menu,
   MessageCircle,
   Navigation,
-  Pause,
   Phone,
-  Play,
   Sparkle,
   Sprout,
   Star,
+  Sun,
   SunMedium,
   X,
 } from "lucide-react";
+
+function ServiceCardIcon({ type }: { type: string }) {
+  const iconProps = { className: "w-4 h-4 text-[#C99A6B]", strokeWidth: 1.5 };
+  switch (type) {
+    case "sun":
+      return <Sun {...iconProps} />;
+    case "leaf":
+      return <Leaf {...iconProps} />;
+    case "silhouette":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-4 h-4 text-[#C99A6B]"
+          aria-hidden="true"
+        >
+          <path d="M12 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+          <path d="M8.5 9c1.5 1.5 1.8 3 1.5 5.5-.3 2.5.5 4.5 1.5 6.5M15.5 9c-1.5 1.5-1.8 3-1.5 5.5.3 2.5-.5 4.5-1.5 6.5" />
+          <path d="M9.5 13.5c1.5.5 3.5.5 5 0" />
+        </svg>
+      );
+    case "flower":
+      return <Flower2 {...iconProps} />;
+    case "heat":
+      return <Flame {...iconProps} />;
+    case "feet":
+      return <Footprints {...iconProps} />;
+    case "face":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-4 h-4 text-[#C99A6B]"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="9" />
+          <path d="M9 10h.01M15 10h.01" />
+          <path d="M9.5 15a3.5 3.5 0 0 0 5 0" />
+        </svg>
+      );
+    case "eye":
+      return <Eye {...iconProps} />;
+    default:
+      return <Sparkle {...iconProps} />;
+  }
+}
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import {
@@ -58,36 +116,46 @@ function Index() {
   const [notice, setNotice] = useState("");
   const [gallery, setGallery] = useState<number | null>(null);
   const [storyOpen, setStoryOpen] = useState(false);
-  const [reviewsOpen, setReviewsOpen] = useState(false);
-  const servicesTrackRef = useRef<HTMLDivElement>(null);
-  const [servicesAutoPlay, setServicesAutoPlay] = useState(true);
-  const [testimonialsPaused, setTestimonialsPaused] = useState(false);
-
-  const scrollServices = (direction: "left" | "right") => {
-    if (!servicesTrackRef.current) return;
-    const cardWidth = 350;
-    servicesTrackRef.current.scrollBy({
-      left: direction === "left" ? -cardWidth : cardWidth,
-      behavior: "smooth",
-    });
-  };
+  const [activeSection, setActiveSection] = useState("inicio");
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    if (!servicesAutoPlay) return;
-    const interval = setInterval(() => {
-      if (!servicesTrackRef.current) return;
-      const { scrollLeft, scrollWidth, clientWidth } = servicesTrackRef.current;
-      if (scrollLeft + clientWidth >= scrollWidth - 10) {
-        servicesTrackRef.current.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        servicesTrackRef.current.scrollBy({ left: 350, behavior: "smooth" });
+    const handleScroll = () => {
+      const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+      setIsScrolled(scrollPos > 24);
+
+      // Section order from bottom to top
+      const sectionIds = ["contato", "depoimentos", "espaco", "sobre", "servicos", "inicio"];
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 160) {
+            setActiveSection(id);
+            break;
+          }
+        }
       }
-    }, 4200);
-    return () => clearInterval(interval);
-  }, [servicesAutoPlay]);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const scrollTo = (id: string) => {
     setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setActiveSection(id);
+    const element = document.getElementById(id);
+    if (element) {
+      const headerOffset = 78;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: "smooth",
+      });
+    }
   };
   const openBooking = (service?: Service, item?: string) => {
     setSelectedService(null);
@@ -123,13 +191,9 @@ function Index() {
 
   return (
     <main className="paula-site">
-      <section id="inicio" className="hero-section">
-        <img
-          src={site.images.hero}
-          className="hero-image"
-          alt="Paula Medeiros com blazer branco e camisa preta"
-        />
-        <header className="site-header page-width">
+      {/* Cabeçalho fixo acompanhando o usuário até o final da página */}
+      <header className={`site-header-fixed ${isScrolled ? "is-scrolled" : ""}`}>
+        <div className="site-header page-width">
           <Button
             variant="ghost"
             className="logo-button"
@@ -143,7 +207,7 @@ function Index() {
               <Button
                 key={item.id}
                 variant="ghost"
-                className={`nav-link ${item.id === "inicio" ? "active" : ""}`}
+                className={`nav-link ${activeSection === item.id ? "active" : ""}`}
                 onClick={() => scrollTo(item.id)}
               >
                 {item.label}
@@ -163,13 +227,40 @@ function Index() {
           {menuOpen && (
             <nav className="mobile-nav" aria-label="Navegação no celular">
               {navigation.map((item) => (
-                <Button key={item.id} variant="ghost" onClick={() => scrollTo(item.id)}>
+                <Button
+                  key={item.id}
+                  variant="ghost"
+                  className={activeSection === item.id ? "active" : ""}
+                  onClick={() => scrollTo(item.id)}
+                >
                   {item.label}
                 </Button>
               ))}
+              <div className="mobile-nav-cta">
+                <Button
+                  className="pill w-full bg-accent text-primary-foreground"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    openBooking();
+                  }}
+                >
+                  <MessageCircle className="w-3.5 h-3.5 mr-1.5" />
+                  Agendar pelo WhatsApp
+                </Button>
+              </div>
             </nav>
           )}
-        </header>
+        </div>
+      </header>
+
+      <section id="inicio" className="hero-section">
+        {/* Espaçador invisível que preserva exatamente a altura e layout do hero */}
+        <div className="hero-header-spacer" aria-hidden="true" />
+        <img
+          src={site.images.hero}
+          className="hero-image"
+          alt="Paula Medeiros com blazer branco e camisa preta"
+        />
         <div className="hero-body page-width">
           <div className="hero-copy">
             <p className="eyebrow">Bronzeamento e estética</p>
@@ -233,92 +324,53 @@ function Index() {
           ))}
         </div>
       </section>
-      <section id="servicos" className="services-enhanced" aria-label="Nossos Serviços">
+      <section id="servicos" className="services-editorial-section" aria-label="Nossos Serviços">
         <div className="page-width">
-          <div className="services-header-center">
-            <p className="eyebrow">Experiências & Cuidados</p>
-            <h2>Nossos Serviços</h2>
-            <p>
-              Procedimentos exclusivos de bronzeamento, massoterapia e estética facial pensados para
-              realçar a sua beleza natural com máxima segurança, conforto e bem-estar.
-            </p>
-            <div className="flex items-center gap-3 mt-2">{bookingButton()}</div>
+          {/* Cabeçalho em duas colunas */}
+          <div className="services-editorial-header">
+            <div className="services-header-left">
+              <span className="services-kicker">NOSSOS SERVIÇOS</span>
+              <h2 className="services-title">
+                Beleza, bem-estar e
+                <br />
+                cuidado em cada detalhe.
+              </h2>
+            </div>
+            <div className="services-header-right">
+              <p className="services-header-desc">
+                Mais do que procedimentos, oferecemos experiências que valorizam o seu tempo, sua
+                beleza e o seu bem-estar.
+              </p>
+            </div>
           </div>
 
-          <div
-            className="services-carousel-wrapper"
-            onMouseEnter={() => setServicesAutoPlay(false)}
-            onMouseLeave={() => setServicesAutoPlay(true)}
-          >
-            <div className="flex items-center justify-between mb-4 px-1">
-              <span className="text-xs text-muted-foreground flex items-center gap-2">
-                <Sparkle className="w-3.5 h-3.5 text-primary shrink-0" />
-                Arraste ou use as setas para explorar nossos tratamentos
-              </span>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => scrollServices("left")}
-                  className="carousel-nav-btn"
-                  aria-label="Serviço anterior"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => scrollServices("right")}
-                  className="carousel-nav-btn"
-                  aria-label="Próximo serviço"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            <div ref={servicesTrackRef} className="services-track">
-              {services.map((service) => (
-                <article key={service.id} className="service-card-v2">
-                  <div className="service-image-box">
-                    <img src={service.image} alt={service.title} loading="lazy" />
-                    <span className="service-tag-badge">{service.tag}</span>
+          {/* Grid de oito cards: Quatro colunas no desktop, duas no tablet, proporcionais no celular */}
+          <div className="services-grid-editorial">
+            {services.map((service) => (
+              <article key={service.id} className="service-card-editorial group">
+                <div className="service-card-media">
+                  <img src={service.image} alt={service.title} loading="lazy" />
+                </div>
+                <div className="service-card-content">
+                  <div className="service-card-icon-wrap">
+                    <ServiceCardIcon type={service.iconType} />
                   </div>
-                  <div className="service-body">
-                    <h3>{service.title}</h3>
-                    <p className="service-sub">{service.subtitle}</p>
-                    <p className="service-desc">{service.description}</p>
-                    <div className="service-items-pill-list">
-                      {service.items.slice(0, 3).map((item) => (
-                        <span key={item} className="service-item-chip">
-                          {item}
-                        </span>
-                      ))}
-                      {service.items.length > 3 && (
-                        <span className="service-item-chip font-medium">
-                          +{service.items.length - 3} mais
-                        </span>
-                      )}
-                    </div>
-                    <div className="service-actions">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setSelectedService(service)}
-                        className="text-xs p-0 h-auto font-medium text-foreground hover:text-primary hover:bg-transparent"
-                      >
-                        Ver procedimentos <ArrowRight className="w-3.5 h-3.5 ml-1" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        onClick={() => openBooking(service)}
-                        className="pill text-[10px] h-7 px-3 bg-accent text-primary-foreground hover:bg-accent/90"
-                      >
-                        Agendar
-                      </Button>
-                    </div>
+                  <h3 className="service-card-name">{service.title}</h3>
+                  <p className="service-card-desc">{service.description}</p>
+                  <div className="service-card-action">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedService(service)}
+                      className="service-card-link"
+                      aria-label={`Saiba mais sobre ${service.title}`}
+                    >
+                      <span>Saiba mais</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
                   </div>
-                </article>
-              ))}
-            </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -393,21 +445,11 @@ function Index() {
             </p>
           </div>
         </div>
-        <div
-          className="testimonials-marquee-container"
-          onMouseEnter={() => setTestimonialsPaused(true)}
-          onMouseLeave={() => setTestimonialsPaused(false)}
-        >
-          <div className={`testimonials-marquee-track ${testimonialsPaused ? "paused" : ""}`}>
+        <div className="testimonials-marquee-container">
+          <div className="testimonials-marquee-track">
             {[...testimonials, ...testimonials].map((review, i) => (
               <article className="testimonial-card-v2" key={`${review.name}-${i}`}>
                 <div className="client-row">
-                  <img
-                    className="client-avatar"
-                    src={review.image}
-                    alt={review.name}
-                    loading="lazy"
-                  />
                   <div className="client-meta">
                     <span className="client-name">{review.name}</span>
                     <span className="client-role">{review.role}</span>
@@ -426,33 +468,6 @@ function Index() {
               </article>
             ))}
           </div>
-        </div>
-        <div className="testimonials-controls">
-          <Button
-            variant="outline"
-            size="sm"
-            className="rounded-full text-xs gap-1.5"
-            onClick={() => setTestimonialsPaused((prev) => !prev)}
-            aria-label={testimonialsPaused ? "Retomar movimento" : "Pausar movimento"}
-          >
-            {testimonialsPaused ? (
-              <>
-                <Play className="w-3 h-3" /> Retomar animação
-              </>
-            ) : (
-              <>
-                <Pause className="w-3 h-3" /> Pausar
-              </>
-            )}
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="rounded-full text-xs gap-1.5"
-            onClick={() => setReviewsOpen(true)}
-          >
-            Ver todos os depoimentos <ArrowRight className="w-3 h-3" />
-          </Button>
         </div>
       </section>
       <section className="booking-band">
@@ -686,17 +701,6 @@ function Index() {
             <p key={text}>{text}</p>
           ))}
           {bookingButton()}
-        </DialogContent>
-      </Dialog>
-      <Dialog open={reviewsOpen} onOpenChange={setReviewsOpen}>
-        <DialogContent className="site-dialog">
-          <DialogTitle>Quem já viveu, recomenda.</DialogTitle>
-          <DialogDescription>Depoimentos</DialogDescription>
-          {testimonials.map((review) => (
-            <blockquote className="expanded-review" key={review.name}>
-              “{review.text}”<cite>– {review.name}</cite>
-            </blockquote>
-          ))}
         </DialogContent>
       </Dialog>
     </main>

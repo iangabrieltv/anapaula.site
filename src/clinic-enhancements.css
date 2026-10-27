@@ -2,202 +2,236 @@
    Paula Medeiros Estética — Enhancements: Serviços, Espaço, Depoimentos & Rodapé
    ========================================================================== */
 
-/* 1. SEÇÃO DE SERVIÇOS (CARROSSEL ANIMADO & CABEÇALHO CENTRALIZADO) */
-.services-enhanced {
-  padding-block: 72px 64px;
-  background: var(--background);
+/* 1. SEÇÃO DE SERVIÇOS (DESIGN EDITORIAL PRECISE 8-CARD GRID) */
+.services-editorial-section {
+  background-color: #F8F5EE;
+  padding-block: 84px 96px;
   position: relative;
   overflow: hidden;
 }
 
-.services-header-center {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto 40px;
+.services-editorial-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(193, 154, 107, 0.3), transparent);
+}
+
+.services-editorial-header {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: flex-end;
+  margin-bottom: 52px;
+}
+
+@media (min-width: 768px) {
+  .services-editorial-header {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+    margin-bottom: 60px;
+  }
+}
+
+.services-header-left .services-kicker {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #9B7853;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.services-header-left .services-title {
+  font-family: var(--font-serif, "Cormorant Garamond", Georgia, serif);
+  font-size: clamp(30px, 3.6vw, 48px);
+  line-height: 1.12;
+  font-weight: 400;
+  color: #241A14;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.services-header-right {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 }
 
-.services-header-center .eyebrow {
-  margin-bottom: 8px;
-  letter-spacing: 0.24em;
+@media (min-width: 768px) {
+  .services-header-right {
+    justify-content: flex-end;
+  }
 }
 
-.services-header-center h2 {
-  font-size: clamp(34px, 3.4vw, 50px);
-  line-height: 1.05;
-  color: var(--foreground);
+.services-header-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #6C5C50;
+  max-width: 440px;
+  margin: 0;
 }
 
-.services-header-center p:not(.eyebrow) {
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--muted-foreground);
-  margin-top: 14px;
-  max-width: 540px;
+/* Grid de 8 Cards */
+.services-grid-editorial {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
 }
 
-.services-header-center .pill {
-  margin-top: 22px;
-  height: 38px;
-  font-size: 10px;
+@media (min-width: 640px) {
+  .services-grid-editorial {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
 }
 
-.services-carousel-wrapper {
-  position: relative;
-  width: 100%;
+@media (min-width: 1024px) {
+  .services-grid-editorial {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
 }
 
-.services-track {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding-block: 10px 24px;
-  padding-inline: 4px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.services-track::-webkit-scrollbar {
-  display: none;
-}
-
-.service-card-v2 {
-  flex: 0 0 clamp(290px, 30vw, 360px);
-  scroll-snap-align: start;
-  border: 1px solid var(--border);
-  background: var(--card);
-  border-radius: 12px;
+/* Card Individual em Marrom Café */
+.service-card-editorial {
+  background: #1F1713;
+  border: 1px solid rgba(193, 154, 107, 0.16);
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 4px 20px color-mix(in oklab, var(--foreground) 6%, transparent);
-  transition:
-    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.3s;
   display: flex;
   flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(24, 16, 11, 0.08);
 }
 
-.service-card-v2:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px color-mix(in oklab, var(--foreground) 10%, transparent);
-  border-color: color-mix(in oklab, var(--primary) 40%, var(--border));
+.service-card-editorial:hover {
+  transform: translateY(-5px);
+  border-color: rgba(201, 154, 107, 0.42);
+  box-shadow: 0 16px 36px rgba(18, 12, 8, 0.22);
 }
 
-.service-card-v2 .service-image-box {
+/* Metade superior: Imagem com transição elegante */
+.service-card-media {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: var(--muted);
+  background-color: #17110E;
 }
 
-.service-card-v2 .service-image-box img {
+.service-card-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: contrast(1.02) saturate(1.02);
 }
 
-.service-card-v2:hover .service-image-box img {
-  transform: scale(1.05);
+.service-card-editorial:hover .service-card-media img {
+  transform: scale(1.06);
 }
 
-.service-card-v2 .service-tag-badge {
+/* Transição visual elegante para a área de conteúdo marrom café */
+.service-card-media::after {
+  content: "";
   position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(22, 16, 12, 0.75);
-  backdrop-filter: blur(8px);
-  color: var(--dark-foreground);
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(31, 23, 19, 0) 40%,
+    rgba(31, 23, 19, 0.5) 75%,
+    #1F1713 100%
+  );
+  pointer-events: none;
 }
 
-.service-card-v2 .service-body {
-  padding: 18px 20px 20px;
+/* Conteúdo do Card */
+.service-card-content {
+  padding: 22px 22px 24px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: 1;
+  background: #1F1713;
 }
 
-.service-card-v2 .service-body h3 {
-  font-size: 21px;
-  line-height: 1.15;
-  color: var(--foreground);
-}
-
-.service-card-v2 .service-body .service-sub {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--primary);
-  font-weight: 700;
-  margin-top: 4px;
-}
-
-.service-card-v2 .service-body .service-desc {
-  font-size: 11px;
-  line-height: 1.55;
-  color: var(--muted-foreground);
-  margin-top: 8px;
-  flex-grow: 1;
-}
-
-.service-card-v2 .service-items-pill-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 14px;
-}
-
-.service-card-v2 .service-item-chip {
-  font-size: 9px;
-  color: var(--foreground);
-  background: color-mix(in oklab, var(--secondary) 65%, transparent);
-  border: 1px solid var(--border);
-  padding: 3px 8px;
-  border-radius: 4px;
-}
-
-.service-card-v2 .service-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 18px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
-}
-
-.carousel-nav-btn {
-  width: 42px;
-  height: 42px;
+.service-card-icon-wrap {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--foreground);
+  background: rgba(201, 154, 107, 0.08);
+  border: 1px solid rgba(201, 154, 107, 0.22);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s;
-  cursor: pointer;
-  box-shadow: 0 2px 8px color-mix(in oklab, var(--foreground) 8%, transparent);
+  color: #C99A6B;
+  margin-bottom: 16px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.carousel-nav-btn:hover {
-  background: var(--primary);
-  color: var(--primary-foreground);
-  border-color: var(--primary);
-  transform: scale(1.05);
+.service-card-editorial:hover .service-card-icon-wrap {
+  background: rgba(201, 154, 107, 0.16);
+  color: #E2BA8F;
+}
+
+.service-card-name {
+  font-family: var(--font-serif, "Cormorant Garamond", Georgia, serif);
+  font-size: 21px;
+  line-height: 1.18;
+  font-weight: 400;
+  color: #FAF5EE;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.01em;
+}
+
+.service-card-desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #C3B3A3;
+  margin: 0 0 20px 0;
+  flex-grow: 1;
+}
+
+/* Link Saiba Mais */
+.service-card-action {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(193, 154, 107, 0.12);
+  display: flex;
+  align-items: center;
+}
+
+.service-card-link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #C99A6B;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.service-card-link svg {
+  transition: transform 0.25s ease;
+}
+
+.service-card-editorial:hover .service-card-link {
+  color: #E6BA8E;
+}
+
+.service-card-editorial:hover .service-card-link svg {
+  transform: translateX(4px);
 }
 
 /* 2. SEÇÃO NOSSO ESPAÇO (4 QUADRADOS COM ELEMENTOS DE FUNDO) */
@@ -491,38 +525,31 @@
 
 .testimonial-card-v2 .client-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 12px;
-  margin-bottom: 14px;
-}
-
-.testimonial-card-v2 .client-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 2px solid var(--gold);
-  padding: 2px;
-  background: var(--background);
-  object-fit: cover;
-  flex-shrink: 0;
+  margin-bottom: 12px;
 }
 
 .testimonial-card-v2 .client-meta {
   display: flex;
   flex-direction: column;
+  gap: 3px;
 }
 
 .testimonial-card-v2 .client-name {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--foreground);
+  letter-spacing: -0.01em;
 }
 
 .testimonial-card-v2 .client-role {
   font-size: 9px;
-  color: var(--muted-foreground);
+  color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  font-weight: 600;
 }
 
 .testimonial-card-v2 .stars-row {
@@ -748,5 +775,115 @@
   }
   .footer-map-card iframe {
     height: 220px;
+  }
+}
+
+/* 5. CABEÇALHO FIXO (STICKY HEADER ATÉ O FINAL DA PÁGINA) */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 86px;
+}
+
+section[id],
+footer[id] {
+  scroll-margin-top: 86px;
+}
+
+.site-header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 50;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(180deg, rgba(14, 10, 8, 0.85) 0%, rgba(14, 10, 8, 0.4) 65%, transparent 100%);
+}
+
+.site-header-fixed.is-scrolled {
+  background: rgba(14, 11, 8, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+}
+
+.hero-header-spacer {
+  height: 82px;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* Nav links com estado ativo e hover luxuoso */
+.site-header-fixed .nav-link {
+  transition: color 0.2s ease, opacity 0.2s ease;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.site-header-fixed .nav-link:hover {
+  color: var(--gold) !important;
+}
+
+.site-header-fixed .nav-link.active {
+  color: var(--gold) !important;
+  font-weight: 600;
+}
+
+.site-header-fixed .nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 6px;
+  right: 6px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+}
+
+/* Mobile Nav Drawer */
+.site-header-fixed .mobile-nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(18, 14, 10, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-bottom: 2px solid var(--gold);
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+.site-header-fixed .mobile-nav button {
+  justify-content: flex-start;
+  padding: 10px 14px;
+  font-size: 13px;
+  border-radius: 6px;
+  color: var(--dark-foreground);
+  transition: all 0.2s;
+}
+
+.site-header-fixed .mobile-nav button:hover,
+.site-header-fixed .mobile-nav button.active {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.site-header-fixed .mobile-nav-cta {
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 760px) {
+  .hero-header-spacer {
+    height: 66px;
   }
 }
