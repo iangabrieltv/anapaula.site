@@ -7,7 +7,7 @@ import avatar1 from "@/assets/avatar-1.png.asset.json";
 import avatar2 from "@/assets/avatar-2.png.asset.json";
 import avatar3 from "@/assets/avatar-3.png.asset.json";
 import hero from "@/assets/hero-paula.png";
-import aboutBanner from "@/assets/about-banner.png";
+const aboutBanner = "/assets/aistudio/Retrato_profissional_com_fundo_dourado_06bd2fc3.png";
 
 // Imagens de alta definição geradas para os serviços
 import serviceBronze from "@/assets/images/service_bronzeamento_1792698900381.jpg";

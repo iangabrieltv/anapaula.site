@@ -2,10 +2,12 @@ import { useState, useRef, useEffect, type FormEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
+  Check,
   ChevronLeft,
   ChevronRight,
   Clock3,
   CheckCircle2,
+  Copy,
   ExternalLink,
   Eye,
   Flame,
@@ -254,22 +256,34 @@ function Index() {
       </header>
 
       <section id="inicio" className="hero-section">
-        {/* Espaçador invisível que preserva exatamente a altura e layout do hero */}
-        <div className="hero-header-spacer" aria-hidden="true" />
+        {/* Imagem de fundo no desktop (panorâmica original) */}
         <img
           src={site.images.hero}
-          className="hero-image"
+          className="hero-image hero-image-desktop"
           alt="Paula Medeiros com blazer branco e camisa preta"
         />
+        {/* Imagem de fundo única no mobile (vertical, preenchendo toda a hero section com a Paula embaixo e textos sobrepostos na parte superior) */}
+        <img
+          src="/assets/aistudio/Retrato_editorial_em_tons_quentes_0b1d81e1.png"
+          className="hero-image hero-image-mobile"
+          alt="Paula Medeiros - Bronzeamento e Estética"
+          loading="eager"
+        />
+        {/* Espaçador invisível para o cabeçalho fixo */}
+        <div className="hero-header-spacer" aria-hidden="true" />
         <div className="hero-body page-width">
           <div className="hero-copy">
-            <p className="eyebrow">Bronzeamento e estética</p>
+            <p className="eyebrow text-white">Bronzeamento e estética</p>
             <h1>{site.heroTitle}</h1>
             <p className="hero-description">{site.heroDescription}</p>
             <div className="hero-actions">
               {bookingButton()}
-              <Button variant="ghost" className="text-action" onClick={() => scrollTo("servicos")}>
-                Conheça nossos serviços <ArrowRight />
+              <Button
+                variant="ghost"
+                className="text-action text-white"
+                onClick={() => scrollTo("servicos")}
+              >
+                Conheça nossos serviços <ArrowRight className="text-white" />
               </Button>
             </div>
           </div>
@@ -330,14 +344,14 @@ function Index() {
           <div className="services-editorial-header">
             <div className="services-header-left">
               <span className="services-kicker">NOSSOS SERVIÇOS</span>
-              <h2 className="services-title">
+              <h2 className="services-title text-white">
                 Beleza, bem-estar e
                 <br />
                 cuidado em cada detalhe.
               </h2>
             </div>
             <div className="services-header-right">
-              <p className="services-header-desc">
+              <p className="services-header-desc text-white">
                 Mais do que procedimentos, oferecemos experiências que valorizam o seu tempo, sua
                 beleza e o seu bem-estar.
               </p>
@@ -374,25 +388,97 @@ function Index() {
           </div>
         </div>
       </section>
-      <section id="sobre" className="about-section" aria-label="Sobre a Paula Medeiros">
-        <img
-          src={site.images.aboutBanner}
-          className="about-bg-image"
-          alt="Paula Medeiros - Realço a beleza que já existe em você"
-        />
-        <div className="about-overlay" />
-        <div className="page-width about-container">
-          <div className="about-copy">
-            <p className="eyebrow">Quem sou eu</p>
-            <h2>Paula Medeiros</h2>
-            <p className="eyebrow about-subtitle">Beleza, cuidado e propósito</p>
-            {site.about.map((text) => (
-              <p key={text}>{text}</p>
-            ))}
-            <Button className="pill" onClick={() => setStoryOpen(true)}>
-              Conheça minha história <ArrowRight />
-            </Button>
-            <img className="about-logo" src={site.images.logo} alt="Paula Medeiros Estética" />
+      <section id="sobre" className="about-responsive-section" aria-label="Sobre a Paula Medeiros">
+        {/* VERSÃO DESKTOP (>= 769px) — Banner Panorâmico Oficial da Paula */}
+        <div className="about-desktop-block">
+          <img
+            src="/assets/aistudio/about-banner-desktop.png"
+            className="about-desktop-image"
+            alt="Paula Medeiros - Realço a beleza que já existe em você"
+            loading="lazy"
+          />
+          <div className="about-desktop-overlay">
+            <div className="about-desktop-copy">
+              <p className="about-kicker">QUEM SOU EU</p>
+              <h2 className="about-name">Paula Medeiros</h2>
+              <p className="about-subheading">BELEZA, CUIDADO E PROPÓSITO</p>
+              <div className="about-description">
+                <p>
+                  Sou Paula Medeiros, especialista em bronzeamento e estética, e acredito que a
+                  beleza vai muito além da aparência. É sobre autoestima, bem-estar e se sentir bem
+                  na própria pele.
+                </p>
+                <p>
+                  Aqui, você encontra um espaço seguro, acolhedor e pensado especialmente para você.
+                </p>
+              </div>
+              <div className="about-cta-wrap">
+                <button
+                  type="button"
+                  className="about-btn-pill"
+                  onClick={() => setStoryOpen(true)}
+                  aria-label="Conheça minha história"
+                >
+                  <span>Conheça minha história</span>
+                  <ArrowRight className="about-btn-icon" />
+                </button>
+              </div>
+              <div className="about-logo-stage">
+                <img
+                  className="about-logo-img"
+                  src={site.images.logo}
+                  alt="Paula Medeiros Estética"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* VERSÃO MOBILE (<= 768px) — Retrato Vertical Oficial */}
+        <div className="about-mobile-block">
+          <div className="about-stage">
+            <img
+              src="/assets/aistudio/Retrato_profissional_com_fundo_dourado_06bd2fc3.png"
+              className="about-stage-photo"
+              alt="Paula Medeiros - Especialista em bronzeamento e estética"
+              loading="lazy"
+            />
+            <div className="about-stage-overlay">
+              <div className="about-stage-content">
+                <p className="about-kicker">QUEM SOU EU</p>
+                <h2 className="about-name">Paula Medeiros</h2>
+                <p className="about-subheading">BELEZA, CUIDADO E PROPÓSITO</p>
+                <div className="about-description">
+                  <p>
+                    Sou Paula Medeiros, especialista em bronzeamento e estética, e acredito que a
+                    beleza vai muito além da aparência. É sobre autoestima, bem-estar e se sentir
+                    bem na própria pele.
+                  </p>
+                  <p>
+                    Aqui, você encontra um espaço seguro, acolhedor e pensado especialmente para
+                    você.
+                  </p>
+                </div>
+                <div className="about-cta-wrap">
+                  <button
+                    type="button"
+                    className="about-btn-pill"
+                    onClick={() => setStoryOpen(true)}
+                    aria-label="Conheça minha história"
+                  >
+                    <span>Conheça minha história</span>
+                    <ArrowRight className="about-btn-icon" />
+                  </button>
+                </div>
+                <div className="about-logo-stage">
+                  <img
+                    className="about-logo-img"
+                    src={site.images.logo}
+                    alt="Paula Medeiros Estética"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -520,48 +606,42 @@ function Index() {
             </div>
           </div>
 
+          {/* Seção de Mapa Limpa: sem bordas, sem ícones, clicável diretamente */}
           <div className="footer-map-section">
-            <div className="footer-map-card">
+            <a
+              href={mapUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="clean-map-link"
+              title="Abrir localização no Google Maps"
+              aria-label="Localização no Google Maps"
+            >
               <iframe
                 title="Localização Paula Medeiros Estética no Google Maps"
                 src="https://maps.google.com/maps?q=Rua%20Arlindo%20Ferreira%20de%20Aguiar,%20182,%20Senador%20Arnon%20de%20Melo,%20Arapiraca%20-%20AL,%2057315-120&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                className="clean-map-iframe"
               />
-              <div className="footer-map-bar">
-                <span>
-                  <MapPin className="w-3.5 h-3.5 text-amber-400" />
-                  Rua Arlindo Ferreira de Aguiar, 182 — Arapiraca - AL
-                </span>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  asChild
-                  className="text-[11px] h-7 gap-1 text-amber-400 hover:text-amber-300"
-                >
-                  <a href={mapUrl} target="_blank" rel="noreferrer">
-                    <Navigation className="w-3 h-3" />
-                    Traçar Rota <ExternalLink className="w-2.5 h-2.5" />
-                  </a>
-                </Button>
-              </div>
-            </div>
+            </a>
 
             <div className="footer-brand-wrap">
-              <img className="footer-logo-img" src={site.images.logo} alt={site.name} />
+              <div className="brand-logo-glow-wrap">
+                <img className="footer-logo-img" src={site.images.logo} alt={site.name} />
+              </div>
               <p className="footer-tagline">
                 Realçando a beleza que já existe em você com procedimentos estéticos exclusivos,
-                bronzeamento personalizado, biossegurança e cuidado acolhedor em Arapiraca.
+                bronzeamento personalizado, biossegurança rigorosa e cuidado acolhedor em Arapiraca.
               </p>
               <div className="footer-actions-row">
                 <Button className="pill" onClick={() => openBooking()}>
                   <MessageCircle className="w-3.5 h-3.5" />
-                  Agendar horário
+                  Agendar pelo WhatsApp
                 </Button>
                 <Button variant="outline" className="pill outline-pill" asChild>
                   <a href={site.instagram} target="_blank" rel="noreferrer">
                     <Instagram className="w-3.5 h-3.5" />
-                    Seguir Instagram
+                    Seguir @paulabronze.estetica
                   </a>
                 </Button>
               </div>

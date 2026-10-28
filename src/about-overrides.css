@@ -1,208 +1,325 @@
-/* Seção Sobre a Paula — Banner panorâmico como imagem de fundo ajustada */
-.about-section {
+/* ==========================================================================
+   Paula Medeiros Estética — Seção "Quem Sou Eu"
+   Desktop: Banner Panorâmico Oficial (Paula à esquerda, texto no centro)
+   Mobile: Retrato Vertical Oficial (Área branca alta no topo, Paula embaixo)
+   ========================================================================== */
+
+.about-responsive-section {
   position: relative;
   width: 100%;
-  min-height: 520px;
-  height: clamp(520px, 33.33vw, 700px);
+  background-color: #EDE6DC;
   overflow: hidden;
-  background-color: #ede5dc;
-  display: flex !important;
-  grid-template-columns: none !important;
-  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
-.about-section .about-bg-image {
+/* ==========================================================================
+   VERSÃO DESKTOP (telas >= 769px) — Banner Panorâmico
+   ========================================================================== */
+.about-desktop-block {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2172 / 724;
+  min-height: 520px;
+  max-height: 680px;
+  background-color: #EDE6DC;
+  overflow: hidden;
+}
+
+.about-desktop-image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: center;
   pointer-events: none;
-  z-index: 0;
+  user-select: none;
 }
 
-.about-section .about-overlay {
+.about-desktop-overlay {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.about-section .about-container {
-  position: relative;
-  z-index: 2;
-  width: 83.8%;
-  max-width: 1200px;
-  margin-inline: auto;
-  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 31%;
+  width: 39%;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
+  padding: 24px 16px;
 }
 
-.about-section .about-copy {
-  position: relative;
-  z-index: 2;
-  font-size: 40px;
-  height: 10px;
-  width: 11px;
-  margin: 0 auto;
-  text-align: center;
+.about-desktop-copy {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 440px;
+}
+
+.about-desktop-copy .about-kicker {
+  font-family: var(--font-sans, "Manrope", sans-serif);
+  font-size: clamp(10px, 0.9vw, 12px);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #8A5532;
+  margin: 0 0 6px 0;
+  line-height: 1.2;
+}
+
+.about-desktop-copy .about-name {
+  font-family: var(--font-serif, "Cormorant Garamond", Georgia, serif);
+  font-size: clamp(28px, 2.5vw, 42px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: #2D1A12;
+  letter-spacing: -0.015em;
+  margin: 0 0 6px 0;
+}
+
+.about-desktop-copy .about-subheading {
+  font-family: var(--font-sans, "Manrope", sans-serif);
+  font-size: clamp(9px, 0.8vw, 11px);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #96613B;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.about-desktop-copy .about-description {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 12px 0;
+}
+
+.about-desktop-copy .about-description p {
+  font-family: var(--font-sans, "Manrope", sans-serif);
+  font-size: clamp(11.5px, 0.92vw, 13px);
+  line-height: 1.55;
+  color: #554438;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+}
+
+.about-desktop-copy .about-cta-wrap {
+  margin: 0 0 10px 0;
+}
+
+.about-desktop-copy .about-btn-pill {
+  font-family: var(--font-sans, "Manrope", sans-serif);
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(237, 229, 220, 0.78) 0%,
-    rgba(237, 229, 220, 0.45) 60%,
-    transparent 100%
-  );
-  border-radius: 12px;
+  gap: 8px;
+  background-color: #8A5532;
+  color: #FFFFFF !important;
+  border: none;
+  border-radius: 9999px;
+  font-size: clamp(11px, 0.85vw, 12.5px);
+  font-weight: 600;
+  padding: 8px 22px;
+  box-shadow: 0 4px 16px rgba(138, 85, 50, 0.28);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  line-height: 1;
 }
 
-.about-section .about-copy > p:nth-of-type(1) {
-  height: 17px;
-  width: 200px;
-  line-height: 20px;
-  font-size: 14px;
-  margin-bottom: 8px;
-  letter-spacing: 0.22em;
+.about-desktop-copy .about-btn-pill:hover {
+  background-color: #724322;
+  box-shadow: 0 6px 20px rgba(138, 85, 50, 0.38);
+  transform: translateY(-1px);
 }
 
-.about-section .about-copy h2,
-.about-section .about-copy > h2:nth-of-type(1) {
-  font-size: 46.4px;
-  line-height: 0.98;
-  width: 500px;
+.about-desktop-copy .about-btn-icon {
+  width: 13px;
+  height: 13px;
+  stroke: #FFFFFF;
+  color: #FFFFFF;
 }
 
-.about-section .about-copy > p:nth-of-type(2) {
-  font-size: 9px;
-  margin-top: 8px;
-  width: 500px;
+.about-desktop-copy .about-logo-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.about-section .about-copy > p:nth-of-type(3) {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--muted-foreground);
-  margin-top: 12px;
-  width: 450px;
-}
-
-.about-section .about-copy > p:nth-of-type(4) {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--muted-foreground);
-  margin-top: 10px;
-  width: 450px;
-}
-
-.about-section .about-copy > button:nth-of-type(1) {
-  font-size: 19px;
-  margin-top: 16px;
-  height: 50.5px;
-  width: 272.812px;
-}
-
-.about-section .about-logo {
-  display: block;
-  width: 140px;
-  height: auto;
-  max-height: 52px;
+.about-desktop-copy .about-logo-img {
+  height: clamp(24px, 2vw, 34px);
+  width: auto;
+  max-width: 140px;
   object-fit: contain;
-  margin: 20px auto 0;
+  display: block;
+  opacity: 0.95;
 }
 
-/* Telas médias (tablets e notebooks compactos) */
-@media (max-width: 1100px) and (min-width: 768px) {
-  .about-section {
-    min-height: 480px;
-    height: clamp(480px, 42vw, 560px);
-  }
-
-  .about-section .about-bg-image {
-    object-position: 25% center;
-  }
-
-  .about-section .about-copy {
-    max-width: 390px;
-    padding: 24px 16px;
-  }
-
-  .about-section .about-copy h2 {
-    font-size: 30px;
-  }
-
-  .about-section .about-copy > p:not(.eyebrow) {
-    font-size: 10px;
-  }
-
-  .about-section .about-logo {
-    width: 125px;
-    max-height: 46px;
-  }
+.about-mobile-block {
+  display: none;
 }
 
-/* Telas de celular (< 768px) */
-@media (max-width: 767px) {
-  .about-section {
-    min-height: 600px;
-    height: auto;
+/* ==========================================================================
+   VERSÃO MOBILE (telas <= 768px) — Retrato Vertical Oficial
+   ========================================================================== */
+@media (max-width: 768px) {
+  .about-desktop-block {
+    display: none !important;
+  }
+
+  .about-mobile-block {
     display: block !important;
-    grid-template-columns: none !important;
-    padding-top: 250px;
-    padding-bottom: 34px;
-    background-color: #ede5dc;
+    background-color: #FFFFFF;
   }
 
-  .about-section .about-bg-image {
-    object-position: 18% top;
-    height: 350px;
+  .about-stage {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    line-height: 0;
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
   }
 
-  .about-section .about-overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(237, 229, 220, 0) 0%,
-      rgba(237, 229, 220, 0.7) 160px,
-      rgba(237, 229, 220, 0.98) 260px,
-      rgba(237, 229, 220, 1) 100%
-    );
-  }
-
-  .about-section .about-container {
+  .about-stage-photo {
+    width: 100%;
     height: auto;
     display: block;
-    width: calc(100% - 40px);
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
   }
 
-  .about-section .about-copy {
+  .about-stage-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 18px 10px;
+    box-sizing: border-box;
+    z-index: 2;
+    text-align: center;
+    line-height: normal;
+  }
+
+  .about-stage-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    max-width: 440px;
+    max-width: 480px;
+    height: 100%;
     margin: 0 auto;
-    padding: 16px 12px 0;
-    background: none;
   }
 
-  .about-section .about-copy h2 {
-    font-size: 34px;
-  }
-
-  .about-section .about-copy > p:not(.eyebrow) {
-    font-size: 12px;
-    max-width: 380px;
-  }
-
-  .about-section .about-copy .pill {
-    height: 36px;
-    font-size: 10px;
-  }
-
-  .about-section .about-logo {
-    width: 130px;
+  .about-stage-content .about-kicker {
+    font-family: var(--font-sans, "Manrope", sans-serif);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #8A5532;
     margin-top: 20px;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .about-stage-content .about-name {
+    font-family: var(--font-serif, "Cormorant Garamond", Georgia, serif);
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1.05;
+    color: #2D1A12;
+    letter-spacing: -0.015em;
+    margin: 0 0 4px 0;
+  }
+
+  .about-stage-content .about-subheading {
+    font-family: var(--font-sans, "Manrope", sans-serif);
+    font-size: 9.5px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #96613B;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+
+  .about-stage-content .about-description {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 0 10px 0;
+    max-width: 440px;
+  }
+
+  .about-stage-content .about-description p {
+    font-family: var(--font-sans, "Manrope", sans-serif);
+    font-size: 12px;
+    line-height: 1.55;
+    color: #554438;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+  }
+
+  .about-stage-content .about-cta-wrap {
+    margin: 0 0 8px 0;
+  }
+
+  .about-stage-content .about-btn-pill {
+    font-family: var(--font-sans, "Manrope", sans-serif);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #8A5532;
+    color: #FFFFFF !important;
+    border: none;
+    border-radius: 9999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 8px 20px;
+    box-shadow: 0 4px 16px rgba(138, 85, 50, 0.28);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .about-stage-content .about-btn-icon {
+    width: 13px;
+    height: 13px;
+    stroke: #FFFFFF;
+    color: #FFFFFF;
+  }
+
+  .about-stage-content .about-logo-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+
+  .about-stage-content .about-logo-img {
+    height: auto;
+    width: 190px;
+    max-width: 190px;
+    object-fit: contain;
+    display: block;
+    opacity: 0.95;
+    margin-bottom: 16px;
   }
 }
