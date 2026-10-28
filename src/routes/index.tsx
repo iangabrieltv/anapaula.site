@@ -527,11 +527,23 @@ function Index() {
             />
             <div className="about-stage-overlay">
               <div className="about-stage-content reveal">
-                <p className="about-kicker">QUEM SOU EU</p>
+                <p
+                  className="about-kicker"
+                  style={{
+                    marginLeft: "0px",
+                    marginTop: "60px",
+                  }}
+                >
+                  QUEM SOU EU
+                </p>
                 <h2 className="about-name">Paula Medeiros</h2>
                 <p className="about-subheading">BELEZA, CUIDADO E PROPÓSITO</p>
                 <div className="about-description">
-                  <p>
+                  <p
+                    style={{
+                      marginTop: "30px",
+                    }}
+                  >
                     Sou Paula Medeiros, especialista em bronzeamento e estética, e acredito que a
                     beleza vai muito além da aparência. É sobre autoestima, bem-estar e se sentir
                     bem na própria pele.
@@ -547,6 +559,9 @@ function Index() {
                     className="about-btn-pill"
                     onClick={() => setStoryOpen(true)}
                     aria-label="Conheça minha história"
+                    style={{
+                      marginTop: "30px",
+                    }}
                   >
                     <span>Conheça minha história</span>
                     <ArrowRight className="about-btn-icon" />
