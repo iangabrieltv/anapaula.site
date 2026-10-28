@@ -310,7 +310,7 @@ function Index() {
         <div className="hero-body page-width">
           <div className="hero-copy">
             <p className="eyebrow text-white">Bronzeamento e estética</p>
-            <h1>{site.heroTitle}</h1>
+            <h1 style={{ marginTop: "0px", fontSize: "60px", fontWeight: "normal" }}>{site.heroTitle}</h1>
             <p className="hero-description">{site.heroDescription}</p>
             <div className="hero-actions">
               {bookingButton()}
