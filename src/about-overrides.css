@@ -57,7 +57,7 @@
   align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 440px;
+  max-width: 800px;
 }
 
 .about-desktop-copy .about-kicker {
@@ -67,13 +67,14 @@
   text-transform: uppercase;
   font-weight: 700;
   color: #8A5532;
-  margin: 0 0 6px 0;
+  margin-top: 5px;
+  margin-bottom: 0px;
   line-height: 1.2;
 }
 
 .about-desktop-copy .about-name {
   font-family: var(--font-serif, "Cormorant Garamond", Georgia, serif);
-  font-size: clamp(28px, 2.5vw, 42px);
+  font-size: 40px;
   font-weight: 400;
   line-height: 1.05;
   color: #2D1A12;
@@ -95,6 +96,7 @@
 .about-desktop-copy .about-description {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 8px;
   margin: 0 0 12px 0;
 }
@@ -107,6 +109,12 @@
   font-weight: 400;
   margin: 0;
   text-align: center;
+}
+
+.about-desktop-copy .about-description p:nth-of-type(1) {
+  width: 460px;
+  max-width: 100%;
+  margin-top: 30px;
 }
 
 .about-desktop-copy .about-cta-wrap {
@@ -125,7 +133,14 @@
   border-radius: 9999px;
   font-size: clamp(11px, 0.85vw, 12.5px);
   font-weight: 600;
-  padding: 8px 22px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   box-shadow: 0 4px 16px rgba(138, 85, 50, 0.28);
   cursor: pointer;
   transition: all 0.25s ease;
@@ -152,9 +167,17 @@
 }
 
 .about-desktop-copy .about-logo-img {
-  height: clamp(24px, 2vw, 34px);
-  width: auto;
-  max-width: 140px;
+  border-width: 0px;
+  border-style: solid;
+  margin-top: 20px;
+  margin-left: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+  width: 800px;
+  max-width: 100%;
+  height: 50px;
   object-fit: contain;
   display: block;
   opacity: 0.95;

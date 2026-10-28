@@ -142,7 +142,32 @@ function Index() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // IntersectionObserver para animações elegantes ao rolar a página
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+          }
+        });
+      },
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -30px 0px",
+      },
+    );
+
+    const elements = document.querySelectorAll(
+      ".reveal, .reveal-scale, .reveal-fade, .reveal-left, .reveal-right",
+    );
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      elements.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
+    };
   }, []);
 
   const scrollTo = (id: string) => {
@@ -175,7 +200,18 @@ function Index() {
       return;
     }
     const data = new FormData(event.currentTarget);
-    const message = `Olá, Paula! Gostaria de agendar.\nNome: ${data.get("name")}\nServiço: ${category}\nProcedimento: ${procedure}\nData: ${data.get("date")}\nHorário: ${data.get("time")}\nPode confirmar a disponibilidade?`;
+    const name = (data.get("name") as string)?.trim() || "";
+    const rawDate = (data.get("date") as string)?.trim() || "";
+    const time = (data.get("time") as string)?.trim() || "";
+    const formattedDate =
+      rawDate.includes("-") && rawDate.split("-")[0].length === 4
+        ? rawDate.split("-").reverse().join("/")
+        : rawDate;
+
+    const procedureText = procedure ? `, ${procedure}` : "";
+    const serviceText = category || "um procedimento";
+    const message = `Olá, Ana Paula! tudo bem?\nMe chamo ${name}, gostaria de realizar ${serviceText}${procedureText}. teria disponibilidade as ${time} do dia ${formattedDate}?`;
+
     window.open(
       `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(message)}`,
       "_blank",
@@ -331,7 +367,7 @@ function Index() {
               ),
             },
           ].map(({ Icon, text }, i) => (
-            <div className="benefit" key={i}>
+            <div className={`benefit reveal delay-${(i + 1) * 100}`} key={i}>
               <Icon />
               <p>{text}</p>
             </div>
@@ -341,7 +377,7 @@ function Index() {
       <section id="servicos" className="services-editorial-section" aria-label="Nossos Serviços">
         <div className="page-width">
           {/* Cabeçalho em duas colunas */}
-          <div className="services-editorial-header">
+          <div className="services-editorial-header reveal">
             <div className="services-header-left">
               <span className="services-kicker">NOSSOS SERVIÇOS</span>
               <h2 className="services-title text-white">
@@ -360,8 +396,11 @@ function Index() {
 
           {/* Grid de oito cards: Quatro colunas no desktop, duas no tablet, proporcionais no celular */}
           <div className="services-grid-editorial">
-            {services.map((service) => (
-              <article key={service.id} className="service-card-editorial group">
+            {services.map((service, index) => (
+              <article
+                key={service.id}
+                className={`service-card-editorial group reveal delay-${((index % 4) + 1) * 100}`}
+              >
                 <div className="service-card-media">
                   <img src={service.image} alt={service.title} loading="lazy" />
                 </div>
@@ -398,12 +437,33 @@ function Index() {
             loading="lazy"
           />
           <div className="about-desktop-overlay">
-            <div className="about-desktop-copy">
-              <p className="about-kicker">QUEM SOU EU</p>
-              <h2 className="about-name">Paula Medeiros</h2>
+            <div className="about-desktop-copy reveal">
+              <p
+                className="about-kicker"
+                style={{
+                  marginTop: "5px",
+                  marginBottom: "0px",
+                }}
+              >
+                QUEM SOU EU
+              </p>
+              <h2
+                className="about-name"
+                style={{
+                  fontSize: "40px",
+                }}
+              >
+                Paula Medeiros
+              </h2>
               <p className="about-subheading">BELEZA, CUIDADO E PROPÓSITO</p>
               <div className="about-description">
-                <p>
+                <p
+                  style={{
+                    width: "460px",
+                    maxWidth: "100%",
+                    marginTop: "30px",
+                  }}
+                >
                   Sou Paula Medeiros, especialista em bronzeamento e estética, e acredito que a
                   beleza vai muito além da aparência. É sobre autoestima, bem-estar e se sentir bem
                   na própria pele.
@@ -418,6 +478,14 @@ function Index() {
                   className="about-btn-pill"
                   onClick={() => setStoryOpen(true)}
                   aria-label="Conheça minha história"
+                  style={{
+                    paddingLeft: "40px",
+                    paddingRight: "40px",
+                    marginLeft: "0px",
+                    marginRight: "0px",
+                    marginTop: "10px",
+                    marginBottom: "10px",
+                  }}
                 >
                   <span>Conheça minha história</span>
                   <ArrowRight className="about-btn-icon" />
@@ -428,6 +496,20 @@ function Index() {
                   className="about-logo-img"
                   src={site.images.logo}
                   alt="Paula Medeiros Estética"
+                  style={{
+                    borderWidth: "0px",
+                    borderStyle: "solid",
+                    marginTop: "20px",
+                    marginLeft: "0px",
+                    paddingTop: "0px",
+                    paddingBottom: "0px",
+                    paddingRight: "0px",
+                    paddingLeft: "0px",
+                    width: "800px",
+                    maxWidth: "100%",
+                    height: "50px",
+                    objectFit: "contain",
+                  }}
                 />
               </div>
             </div>
@@ -444,7 +526,7 @@ function Index() {
               loading="lazy"
             />
             <div className="about-stage-overlay">
-              <div className="about-stage-content">
+              <div className="about-stage-content reveal">
                 <p className="about-kicker">QUEM SOU EU</p>
                 <h2 className="about-name">Paula Medeiros</h2>
                 <p className="about-subheading">BELEZA, CUIDADO E PROPÓSITO</p>
@@ -489,7 +571,7 @@ function Index() {
           <div className="space-botanical-pattern" />
         </div>
         <div className="page-width">
-          <div className="space-header-center">
+          <div className="space-header-center reveal">
             <p className="eyebrow">Nosso espaço</p>
             <h2>Um refúgio pensado para o seu bem-estar</h2>
             <p>
@@ -502,7 +584,7 @@ function Index() {
               <button
                 type="button"
                 key={item.title}
-                className="space-square-card group"
+                className={`space-square-card group reveal delay-${(index + 1) * 150}`}
                 onClick={() => setGallery(index)}
                 aria-label={`Ver ambiente: ${item.title}`}
               >
@@ -522,7 +604,7 @@ function Index() {
       </section>
       <section id="depoimentos" className="testimonials-enhanced" aria-label="Depoimentos">
         <div className="page-width">
-          <div className="testimonials-header-center">
+          <div className="testimonials-header-center reveal">
             <p className="eyebrow">Depoimentos reais</p>
             <h2>Quem já viveu, recomenda.</h2>
             <p>
@@ -531,7 +613,7 @@ function Index() {
             </p>
           </div>
         </div>
-        <div className="testimonials-marquee-container">
+        <div className="testimonials-marquee-container reveal-scale">
           <div className="testimonials-marquee-track">
             {[...testimonials, ...testimonials].map((review, i) => (
               <article className="testimonial-card-v2" key={`${review.name}-${i}`}>
@@ -558,7 +640,7 @@ function Index() {
       </section>
       <section className="booking-band">
         <img src={bookingBackground} alt="" />
-        <div className="page-width booking-band-content">
+        <div className="page-width booking-band-content reveal">
           <div>
             <p className="eyebrow">Pronta para se sentir ainda mais linda?</p>
             <h2>Agende seu horário</h2>
@@ -570,7 +652,7 @@ function Index() {
       <footer id="contato" className="footer-enhanced" aria-label="Contatos e localização">
         <div className="page-width">
           <div className="footer-top-cards">
-            <div className="footer-contact-card">
+            <div className="footer-contact-card reveal delay-100">
               <div className="card-icon">
                 <MessageCircle />
               </div>
@@ -578,7 +660,7 @@ function Index() {
               <p>{site.phoneLabel}</p>
               <p className="text-[10px] text-amber-500/80 mt-1">Atendimento personalizado</p>
             </div>
-            <div className="footer-contact-card">
+            <div className="footer-contact-card reveal delay-200">
               <div className="card-icon">
                 <MapPin />
               </div>
@@ -588,7 +670,7 @@ function Index() {
                 Senador Arnon de Melo, Arapiraca - AL
               </p>
             </div>
-            <div className="footer-contact-card">
+            <div className="footer-contact-card reveal delay-300">
               <div className="card-icon">
                 <Clock3 />
               </div>
@@ -596,7 +678,7 @@ function Index() {
               <p>{site.days}</p>
               <p className="text-[10px] text-amber-500/80 mt-1">{site.hours}</p>
             </div>
-            <div className="footer-contact-card">
+            <div className="footer-contact-card reveal delay-400">
               <div className="card-icon">
                 <Instagram />
               </div>
@@ -607,7 +689,7 @@ function Index() {
           </div>
 
           {/* Seção de Mapa Limpa: sem bordas, sem ícones, clicável diretamente */}
-          <div className="footer-map-section">
+          <div className="footer-map-section reveal">
             <a
               href={mapUrl}
               target="_blank"
@@ -783,6 +865,17 @@ function Index() {
           {bookingButton()}
         </DialogContent>
       </Dialog>
+      {/* Botão Flutuante de WhatsApp com animação de pulso contínua */}
+      <button
+        type="button"
+        className="floating-whatsapp-btn"
+        onClick={() => openBooking()}
+        aria-label="Falar com a Paula no WhatsApp"
+        title="Agendar pelo WhatsApp"
+      >
+        <MessageCircle />
+        <span className="floating-label">Agendar Horário</span>
+      </button>
     </main>
   );
 }

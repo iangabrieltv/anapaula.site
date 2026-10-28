@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import aboutCss from "../about-overrides.css?url";
 import clinicEnhancementsCss from "../clinic-enhancements.css?url";
+import animationsCss from "../animations.css?url";
 import { Button } from "../components/ui/button";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -94,6 +95,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "stylesheet", href: aboutCss },
       { rel: "stylesheet", href: clinicEnhancementsCss },
+      { rel: "stylesheet", href: animationsCss },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap",

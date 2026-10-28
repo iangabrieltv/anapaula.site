@@ -1,0 +1,397 @@
+/* ==========================================================================
+   Paula Medeiros Estética — Sistema de Animações & Micro-interações
+   ========================================================================== */
+
+/* 1. KEYFRAMES PRINCIPAIS */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes floatSubtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes shimmerEffect {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+@keyframes pulseGoldGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(226, 186, 143, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(226, 186, 143, 0);
+  }
+}
+
+@keyframes whatsappPulse {
+  0%, 100% {
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.35), 0 0 0 0 rgba(37, 211, 102, 0.6);
+  }
+  50% {
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.45), 0 0 0 14px rgba(37, 211, 102, 0);
+  }
+}
+
+/* 2. CLASSES DE REVEAL AO ROLAR A PÁGINA (SCROLL REVEAL) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.reveal-fade.revealed {
+  opacity: 1;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-35px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(35px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Delays escalonados para grids e sequências */
+.delay-100 { transition-delay: 100ms; }
+.delay-150 { transition-delay: 150ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-250 { transition-delay: 250ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-350 { transition-delay: 350ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-450 { transition-delay: 450ms; }
+.delay-500 { transition-delay: 500ms; }
+.delay-600 { transition-delay: 600ms; }
+
+/* 3. HERO INTRO ANIMATION */
+.hero-body .hero-copy > .eyebrow {
+  animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-body .hero-copy > h1 {
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.hero-body .hero-copy > .hero-description {
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.hero-body .hero-copy > .hero-actions {
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
+/* 4. BENEFÍCIOS BAND COM ANIMAÇÃO AO PASSAR O MOUSE */
+.benefit {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+.benefit:hover {
+  transform: translateY(-3px);
+}
+
+.benefit svg {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+}
+
+.benefit:hover svg {
+  transform: scale(1.18) rotate(6deg);
+  color: #C99A6B !important;
+}
+
+/* 5. SERVIÇOS EDITORIAL CARDS HOVER E TRANSIÇÕES */
+.service-card-editorial {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  will-change: transform;
+}
+
+.service-card-editorial:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 25px rgba(226, 186, 143, 0.15);
+  border-color: rgba(226, 186, 143, 0.4);
+}
+
+.service-card-editorial .service-card-media img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card-editorial:hover .service-card-media img {
+  transform: scale(1.08);
+}
+
+.service-card-editorial .service-card-icon-wrap {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s;
+}
+
+.service-card-editorial:hover .service-card-icon-wrap {
+  transform: scale(1.12) rotate(4deg);
+  background-color: rgba(226, 186, 143, 0.22);
+}
+
+.service-card-editorial .service-card-link {
+  transition: color 0.3s ease;
+}
+
+.service-card-editorial .service-card-link svg {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card-editorial:hover .service-card-link svg {
+  transform: translateX(5px);
+}
+
+/* 6. BOTÃO BRILHO SHIMMER */
+.pill, .about-btn-pill {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pill::after, .about-btn-pill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+}
+
+.pill:hover::after, .about-btn-pill:hover::after {
+  animation: shimmerEffect 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pill:hover, .about-btn-pill:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.pill:active, .about-btn-pill:active {
+  transform: translateY(0);
+}
+
+/* 7. BOTÃO FLUTUANTE DE WHATSAPP FIXO */
+.floating-whatsapp-btn {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #25D366;
+  color: #FFFFFF !important;
+  border-radius: 9999px;
+  padding: 12px 20px 12px 14px;
+  box-shadow: 0 8px 26px rgba(37, 211, 102, 0.4);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  animation: whatsappPulse 3s infinite ease-in-out;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-sans, "Manrope", sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.floating-whatsapp-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.55);
+  background-color: #20bd5a;
+}
+
+.floating-whatsapp-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.2;
+}
+
+@media (max-width: 640px) {
+  .floating-whatsapp-btn {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px;
+    border-radius: 50%;
+  }
+  .floating-whatsapp-btn .floating-label {
+    display: none;
+  }
+}
+
+/* 8. ESPAÇO SQUARES EXPAND EFFECT */
+.space-square-card {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease, border-color 0.4s ease !important;
+}
+
+.space-square-card:hover {
+  transform: translateY(-8px) scale(1.015) !important;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.6), 0 0 25px rgba(226, 186, 143, 0.25) !important;
+}
+
+.space-square-card:hover .expand-indicator {
+  transform: scale(1.15) rotate(90deg);
+  background-color: var(--gold);
+  color: #1A0D07;
+}
+
+/* 9. DEPOIMENTOS MARQUEE HOVER PAUSE & CARD ELEVATION */
+.testimonials-marquee-container:hover .testimonials-marquee-track {
+  animation-play-state: paused;
+}
+
+.testimonial-card-v2 {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.testimonial-card-v2:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  border-color: rgba(226, 186, 143, 0.5);
+}
+
+/* 10. FOOTER CARDS HOVER */
+.footer-contact-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.footer-contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+  border-color: rgba(226, 186, 143, 0.4);
+}
+
+.footer-contact-card:hover .card-icon {
+  transform: scale(1.15) rotate(6deg);
+  background: var(--gold);
+  color: #1A0D07;
+}
+
+.card-icon {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s, color 0.3s;
+}
+
+/* 11. MAP LINK HOVER EFFECT */
+.clean-map-link {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.clean-map-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* 12. DIALOG ANIMATION */
+.site-dialog {
+  animation: fadeInScale 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-fade,
+  .reveal-scale,
+  .reveal-left,
+  .reveal-right,
+  .hero-body .hero-copy > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
